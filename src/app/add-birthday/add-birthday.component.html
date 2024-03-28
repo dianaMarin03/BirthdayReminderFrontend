@@ -1,0 +1,39 @@
+<form nz-form [formGroup]="addForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label class="redText" [nzSm]="6" [nzXs]="24" nzRequired >FriendName</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The friend name is not valid !">
+        <input nz-input formControlName="friendName" id="friendName" />
+      </nz-form-control>
+    </nz-form-item>
+   
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired > Age</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input nz-input type="number" formControlName="age" id="age" />
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please add a age</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>  
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Phone Number</nz-form-label>
+        <nz-form-control
+          [nzSm]="14"
+          [nzXs]="24"
+          nzErrorTip="Please input your phone number!"
+        >
+        <input nz-input type="number" formControlName="numb" id="numb" />
+    </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Birth Date</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <nz-date-picker formControlName="datePicker"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+          <button nz-button nzType="primary">Add</button>
+        </nz-form-control>
+      </nz-form-item>
+  </form>

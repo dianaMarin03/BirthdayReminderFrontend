@@ -1,0 +1,43 @@
+<div class="home">
+  <nz-table #editRowTable nzBordered [nzData]="bds" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th nzWidth="25%">FriendName</th>
+        <th nzWidth="15%">FriendAge</th>
+        
+        <th nzWidth="15%">Birthday date</th>
+        <th nzWidth="15%">Mobile phone </th>
+        <th nzWidth="15%">Wishes ist </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+          <td>{{ data.friendName}}</td>
+          <td>{{ data.age}}</td>
+          <td>{{ data.birthDayDate }}</td>
+          
+          <td>{{ data.phoneNumber }}</td>
+          <td>{{ data.wishes }}</td>
+          <td><a (click)="startEdit(data.id)">Edit</a></td>
+        </ng-container>
+        <ng-template #editTemplate>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.friendName" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.age" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.birthDayDate" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.phoneNumber" /></td>
+          <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.wishes" /></td>
+          <td>
+            <a (click)="saveEdit(data.id)" class="save">Save</a>
+            <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">     Cancel</a>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </nz-table>
+<button nz-button nzType="primary" [routerLink]="['/add', userId]">
+    <span nz-icon nzType="add"></span>
+   Add
+  </button>
+</div>
